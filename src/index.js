@@ -11,6 +11,7 @@ import Conteudo from './page/Conteudo';
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Disciplina from './page/Disciplina';
+import Formulario from './page/Formulario';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDZc7R_-lLK9xKfa4_610JI7Izk4b831Xc",
@@ -29,10 +30,10 @@ firebase.initializeApp(firebaseConfig);
 
 let data = {
   "ID": "HS230001",
-  "Primeiro Nome": "João Vitor",
-  "Email": "jv86679@gmail.com",
-  "Sobrenome": "Alcantara",
-  "Apelido": "Jovi",
+  "Primeiro Nome": "João Vitor", 
+  "Email": "jv86679@gmail.com", 
+  "Sobrenome": "Alcantara", 
+  "Apelido": "Jovi", 
   "Nivel": "Estudante",
   "Curso": "Ciência da Computação",
   "Universidade": "Unicamp",
@@ -204,6 +205,10 @@ const router = createBrowserRouter([
   {
     path: "/Conteudo",
     element: <Conteudo data={data3} user={data}/>
+  },
+  {
+    path: "/Formulario",
+    element: <Formulario user={data} base={firebase}/>
   }
 ]);
 
