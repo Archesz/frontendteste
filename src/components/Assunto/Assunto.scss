@@ -1,0 +1,43 @@
+.assunto-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+
+    .assunto-name{
+        font-weight: bold;
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .assunto-row{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 20px;
+        row-gap: 20px;
+
+        .conteudo-container{
+            width: 360px;
+            height: 140px;
+            border-radius: 4px;
+            border: 3px solid #e70b0b;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            cursor: pointer;
+
+            &:hover{
+                transition: .4s;
+                background-color: #e70b0b;
+
+            }
+        
+            .assunto{
+                margin-bottom: 8px;
+                font-weight: bold;
+                font-size: 12px;
+            }
+        }
+    }
+}

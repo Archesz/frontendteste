@@ -1,8 +1,8 @@
 import React from 'react'
 import '../styles/home.scss'
-import Avatar from '../components/Avatar/Avatar'
 import Button from '../components/Button/Button'
 import DisciplinaIcon from '../components/DisciplinaIcon/DisciplinaIcon'
+import ProgressBar from '../graphs/ProgressBar/ProgressBar'
 
 import Today from '../components/Today/Today'
 import News from '../components/News/News'
@@ -13,27 +13,20 @@ import { GiErlenmeyer, GiDinosaurBones, GiLogicGateOr} from 'react-icons/gi'
 
 function Home(props) { 
 
-    let data = props.data
+    const objetoSerializado = localStorage.getItem("HerbertData");
+
+    const data = JSON.parse(objetoSerializado)[0];
     
-    if(props.type === "student"){
+    function goToDisciplina(disciplina){
+        localStorage.setItem("Disciplina", disciplina);
+        window.location.assign("/Disciplina")
+    }
+
+    if(props.type === "Estudante"){
         return (
             <div className='home-container'>
-
-                <div className='home-menu'></div>
-
+                
                 <div className='home-col'>
-
-                    <div className='home-header'>
-                        
-                        <span className='header-name'>Olá, {data["Apelido"]}</span>
-
-                        <div className='header-icons'>
-
-                            <Avatar url={data["URLFoto"]}/>
-
-                        </div>
-
-                    </div>
 
                     <div className='home-row'>
 
@@ -41,7 +34,7 @@ function Home(props) {
                             
                             <div className='perfil-infos'>
 
-                                <img src={data["URLFoto"]} className='perfil-foto'/>
+                                <img src={data["URLFoto"]} className='perfil-foto' alt="Foto de Perfil"/>
                                 
                                 <div className='perfil-col'>
                                     <div className='badge student'>{data['Status']}</div>
@@ -70,21 +63,36 @@ function Home(props) {
                             <div className='perfil-row'>
 
                                 <div className='perfil-desempenho'>
-                                    <span className='perfil-label'>Disciplinas</span>
+                                    <span className='label-col'>Disciplinas</span>
 
                                     <div className='disciplinas'>
-                                        <DisciplinaIcon materia="Matemática" icon={<TbMathFunction className='icon'/>} color="red"/>
-                                        <DisciplinaIcon materia="Física" icon={<TbAtom className='icon'/>} color="green"/>
-                                        <DisciplinaIcon materia="Química" icon={<GiErlenmeyer className='icon'/>} color="green"/>
-                                        <DisciplinaIcon materia="Biologia" icon={<TbDna2 className='icon'/>} color="green"/>
-                                        <DisciplinaIcon materia="Geografia" icon={<TbMap className='icon'/>} color="yellow"/>
-                                        <DisciplinaIcon materia="História" icon={<GiDinosaurBones className='icon'/>} color="yellow"/>
-                                        <DisciplinaIcon materia="Filosofia" icon={<GiLogicGateOr className='icon'/>} color="yellow"/>
-                                        <DisciplinaIcon materia="Sociologia" icon={<TbSocial className='icon'/>} color="yellow"/>
-                                        <DisciplinaIcon materia="Literatura" icon={<TbBook2 className='icon'/>} color="blue"/>
-                                        <DisciplinaIcon materia="Gramática" icon={<TbPencil className='icon'/>} color="blue"/>
-                                        <DisciplinaIcon materia="Redação" icon={<TbBook className='icon'/>} color="blue"/>
+                                        <DisciplinaIcon materia="Matemática" icon={<TbMathFunction className='icon'/>} color="red" onClick={() => {goToDisciplina("Matemática")}}/>
+                                        <DisciplinaIcon materia="Física" icon={<TbAtom className='icon'/>} color="green" onClick={() => {goToDisciplina("Física")}}/>
+                                        <DisciplinaIcon materia="Química" icon={<GiErlenmeyer className='icon'/>} color="green" onClick={() => {goToDisciplina("Química")}}/>
+                                        <DisciplinaIcon materia="Biologia" icon={<TbDna2 className='icon'/>} color="green" onClick={() => {goToDisciplina("Biologia")}}/>
+                                        <DisciplinaIcon materia="Geografia" icon={<TbMap className='icon'/>} color="yellow" onClick={() => {goToDisciplina("Geografia")}}/>
+                                        <DisciplinaIcon materia="História" icon={<GiDinosaurBones className='icon'/>} color="yellow" onClick={() => {goToDisciplina("História")}}/>
+                                        <DisciplinaIcon materia="Filosofia" icon={<GiLogicGateOr className='icon'/>} color="yellow" onClick={() => {goToDisciplina("Filosofia")}}/>
+                                        <DisciplinaIcon materia="Sociologia" icon={<TbSocial className='icon'/>} color="yellow" onClick={() => {goToDisciplina("Sociologia")}}/>
+                                        <DisciplinaIcon materia="Literatura" icon={<TbBook2 className='icon'/>} color="blue" onClick={() => {goToDisciplina("Literatura")}}/>
+                                        <DisciplinaIcon materia="Gramática" icon={<TbPencil className='icon'/>} color="blue" onClick={() => {goToDisciplina("Gramática")}}/>
+                                        <DisciplinaIcon materia="Redação" icon={<TbBook className='icon'/>} color="blue" onClick={() => {goToDisciplina("Redação")}}/>
+                                    </div>
 
+                                </div>
+
+                                <div className='perfil-data'>
+                                    
+                                    <span className='label-col'>Desempenho e Interesses</span>
+                                    
+                                    <div className='barras'>
+                                        <ProgressBar percentage={data["Interesses"]["Exatas"]} label="Exatas"/>
+                                        <ProgressBar percentage={data["Interesses"]["Natureza"]} label="Natureza"/>
+                                        <ProgressBar percentage={data["Interesses"]["Humanidades"]} label="Humanidades"/>
+                                        <ProgressBar percentage={data["Interesses"]["Linguagens"]} label="Linguagens"/>
+                                        <ProgressBar percentage={data["Interesses"]["Tecnologia"]} label="Tecnologia"/>
+                                        <ProgressBar percentage={data["Interesses"]["Ciência"]} label="Ciência"/>
+                                        <ProgressBar percentage={data["Interesses"]["Arte"]} label="Arte"/>
                                     </div>
 
                                 </div>

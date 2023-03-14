@@ -1,0 +1,21 @@
+.home-header{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .header-name{
+        font-weight: bolder;
+        font-size: 26px;
+    }
+
+    .header-icons{
+        width: 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

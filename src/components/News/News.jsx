@@ -12,6 +12,23 @@ function News() {
     
     const [value, setValue] = useState(data[0]);
 
+    function setActiveCount(value) {
+        const counts = document.querySelectorAll('.count');
+      
+        if (value < 0 || value > counts.length) {
+          return; // se o valor estiver fora do intervalo de 1 a 3, não faz nada
+        }
+      
+        counts.forEach((count, index) => {
+          if (index === value) {
+            count.classList.add('active'); // adiciona a classe "active" na div correspondente ao valor
+            setValue(data[value])
+          } else {
+            count.classList.remove('active'); // remove a classe "active" das outras divs
+          }
+        });
+      }
+
     return (
         <div className='news-container'>
             
@@ -19,15 +36,14 @@ function News() {
 
             <a className='news-title' href="https://vestibular.mundoeducacao.uol.com.br/noticias">{value["Nome"]}</a>
 
-
             <div className='news-date'>
                 {value["Data"]} - {value["Hora"]}
             </div>
 
             <div className='news-count'>
-                <div className='count active' onClick={() => {setValue(data[0])}}></div>
-                <div className='count' onClick={() => {setValue(data[1])}}></div>
-                <div className='count' onClick={() => {setValue(data[2])}}></div>
+                <div className='count active' onClick={() => {setActiveCount(0)}}></div>
+                <div className='count' onClick={() => {setActiveCount(1)}}></div>
+                <div className='count' onClick={() => {setActiveCount(2)}}></div>
             </div>
         </div>
     )
